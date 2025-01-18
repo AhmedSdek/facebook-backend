@@ -98,7 +98,9 @@ io.on('connection', (socket) => {
         }
     });
 });
-
+app.get("/", (req, res) => {
+    res.send("Hello, World!");
+});
 app.set('socketio', io);
 mongoose
     .connect(process.env.DB_URL)
