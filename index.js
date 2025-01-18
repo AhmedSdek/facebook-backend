@@ -14,7 +14,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 // إنشاء خادم HTTP وربطه بـ Express
 const server = http.createServer(app);
-export const io = new Server(server, { cors: { origin: '*' } });
+export const io = new Server(server, {
+    cors: {
+        origin: "*", // رابط Vercel الخاص بالواجهة الأمامية
+        methods: ["GET", "POST"],
+    },
+    transports: ["websocket", "polling"], // السماح بالنقل عبر WebSocket وPolling
+});
 
 app.use(cors());
 app.use(express.json());
