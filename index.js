@@ -94,13 +94,13 @@ io.on('connection', (socket) => {
     // عند انقطاع الاتصال
     socket.on('disconnect', () => {
         // console.log('User disconnected:', socket.id);
-        for (let [userId, socketId] of connectedUsers.entries()) {
-            if (socketId === socket.id) {
-                connectedUsers.delete(userId);
-                // console.log(`User disconnected: ${userId}`);
-                break;
-            }
-        }
+        // for (let [userId, socketId] of connectedUsers.entries()) {
+        //     if (socketId === socket.id) {
+        //         connectedUsers.delete(userId);
+        //         // console.log(`User disconnected: ${userId}`);
+        //         break;
+        //     }
+        // }
     });
 });
 app.get("/", (req, res) => {
