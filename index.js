@@ -40,7 +40,13 @@ io.on('connection', (socket) => {
     // console.log('User connected:', socket.id);
     // تسجيل المستخدم عند الاتصال
     socket.on('registerUser', (userId) => {
-        connectedUsers.set(userId, socket.id);
+        if (connectedUsers.has(userId)) {
+            console.log(`User ${userId} is already connected.`);
+        } else {
+            connectedUsers.set(userId, socket.id);
+            console.log(`User ${userId} has been registered.`);
+        }
+        // connectedUsers.set(userId, socket.id);
         // console.log(connectedUsers)
     });
     // عند إرسال طلب صداقة
