@@ -73,23 +73,22 @@ io.on('connection', (socket) => {
         const onlineFriends = friendIds.filter((id) => connectedUsers.has(id));
         callback(onlineFriends); // إرسال قائمة الأصدقاء المتصلين إلى العميل
     });
-    // عند إرسال رسالة
-    socket.on('sendMessage', async (data) => {
+
+    // استقبال الرسائل
+    socket.on("sendMessage", async (data) => {
         const { sender, receiver, content } = data;
         try {
             const newMessage = new messageModel({ sender, receiver, content });
             await newMessage.save();
-
             // إرسال الرسالة للطرف الآخر
             const receiverSocket = connectedUsers.get(receiver);
             if (receiverSocket) {
-                io.to(receiverSocket).emit('receiveMessage', newMessage);
+                io.to(receiverSocket).emit("receiveMessage", newMessage);
             }
-
-            // إرسال تأكيد للطرف المُرسل
-            socket.emit('messageSent', newMessage);
+            // إرسال تأكيد للمُرسل
+            socket.emit("messageSent", newMessage);
         } catch (err) {
-            console.error('Error saving message:', err.message);
+            console.error("Error saving message:", err.message);
         }
     });
     // عند انقطاع الاتصال
