@@ -87,7 +87,7 @@ io.on('connection', (socket) => {
             }
 
             // إرسال تأكيد للطرف المُرسل
-            socket.emit('messageSent', newMessage);
+            //socket.emit('messageSent', newMessage);
         } catch (err) {
             console.error('Error saving message:', err.message);
         }
